@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UD1-T1-Pag4</title>
+</head>
+<body>
+  <div>
+    <button id="btnBarcelona">Jugadores del Barcelona</button>
+    <button id="btnRealMadrid">Jugadores del Real Madrid</button>
+  </div>
+  <div id="listaJugadores"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>
+   //Codifica aquí lo que consideres necesario
+
+    var arrayJugadores = [] ;
+
+    function dameJugadoresDel(equipo){
+        
+        var jugadores = [] ;
+
+        for (var i = 0; i < arrayJugadores.length; i++) {
+            if (equipo == arrayJugadores[i].equipo){
+                jugadores.push(arrayJugadores[i]) ;
+            }
+        }
+
+       return jugadores ;
+    }
+
+    function visualizaJugadores(arrayJuga, divDondeVisualizar){
+        
+        var contenido = '<ul>' ;
+
+        for (var i = 0; i < arrayJuga.length; i++) {
+            contenido += '<li><div>' + 
+                arrayJuga[i].id + '</br>' +
+                arrayJuga[i].equipo + '</br>' +
+                arrayJuga[i].nombre + ' ' + arrayJuga[i].apellido + '</br>' +
+                arrayJuga[i].posicion + '</br>' +
+                arrayJuga[i].dorsal + '</br>' +
+                arrayJuga[i].desc + '</br>' +
+                '</div></li>' ; 
+            ;
+        }
+        
+        $('#' + divDondeVisualizar ).html('<ul>' + contenido + '</ul>') ;
+
+    }
+
+   $('button').click(function(){
+
+        var idBoton = $(this).attr('id') ;
+
+        if (idBoton == 'btnRealMadrid') {
+            visualizaJugadores( dameJugadoresDel('Real Madrid') , 'listaJugadores');
+        } else if (idBoton == 'btnBarcelona') {
+            visualizaJugadores( dameJugadoresDel('F.C.Barcelona') , 'listaJugadores');
+        }
+
+   })
+
+   $.ajax({
+        method: "GET",
+        url: "http://www.media.formandome.es/phonegap/tutorial/futbolistas.php"
+    }).done(function(datos) {
+        arrayJugadores = datos ;
+        console.log(datos) ;
+    }).fail(function() {
+        console.log("Algo salió mal") ;
+    }).always(function() {
+        console.log("Siempre se ejecuta") ;
+    });
+
+  </script>
+</body>
+</html>

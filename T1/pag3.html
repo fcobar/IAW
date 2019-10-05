@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UD1-T1-Pag3</title>
+</head>
+<body>
+    <h1>ALUMNOS DE ASIR 1</h1>
+    <DIV id="tablaalumnosASIR1">    </DIV>
+    <h1>ALUMNOS DE ASIR 2</h1>
+    <DIV id="tablaalumnosASIR2">    </DIV>
+   
+<script>
+ //Codifica aquí tu javascript necesario
+
+ var alumnos = [
+     {id: 1, nombre: "Ana", apellidos:"Lara Vidal", grupo:"ASIR2"},
+     {id: 2, nombre: "Nemesio", apellidos:"Castro Bullejos", grupo:"ASIR1"},
+     {id: 3, nombre: "Francisco", apellidos:"Huertas García", grupo:"ASIR2"},
+     {id: 4, nombre: "María", apellidos:"Montalban Sánchez", grupo:"ASIR2"}
+ ]
+ 
+ function visualizaAlumnos(grupo,idDiv){
+
+     var contenido = "<table>";
+     contenido += "<tr><th>ID</th><th>APELLIDOS</th></tr>";
+     for(var i=0; i<alumnos.length; i++) {
+        if(alumnos[i].grupo == grupo) {
+            contenido += "<tr><td>" + alumnos[i].id + "</td><td>" + alumnos[i].apellidos + "</td></tr>";
+        }
+     }
+     contenido += "</table>";
+     document.getElementById(idDiv).innerHTML+=contenido ;
+ }
+
+ var gruposVisualizar = [
+     { grupo:'ASIR1', id:'tablaalumnosASIR1'}, 
+     { grupo:'ASIR2', id:'tablaalumnosASIR2'}
+ ] ;
+ 
+ for(var i=0; i < gruposVisualizar.length; i++) {
+    visualizaAlumnos(gruposVisualizar[i].grupo, gruposVisualizar[i].id);
+ }
+ 
+</script>
+</body>
+</html>
